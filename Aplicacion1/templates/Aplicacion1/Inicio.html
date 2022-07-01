@@ -1,0 +1,61 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %}
+
+
+{% block seccion_nombre %}
+<h1>Listado de posts
+  {{mensaje}}
+</h1>    
+
+<br>
+<a href="{% url 'Aplicacion1:PostCrear' %}"><button type="button" class="btn btn-primary">Crear nuevo post</button></a>
+<a href="{% url 'Aplicacion1:Inicio' %}"><button type="button" class="btn btn-light">Refresca</button></a>
+
+<br>
+<br>
+
+{% endblock %}
+{% block cuerpo %}
+
+{% for posts in object_list %}
+
+
+<div class="card" style="width: 30rem;">
+    
+
+    {% if posts.imagen %}
+      <img src="{{ posts.imagen.url}}" class="rounded float-start" alt="...">
+
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{ posts.nombrePost }}</h5>
+      <p class="card-text">{{ posts.CuerpoPost |safe}}</p>
+      <div style="text-align: right">
+        <!----comienza boton dropdown---->
+        <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              ...
+            </a>
+            <div style="text-align: left">
+                
+            </div>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item" href="{% url 'Aplicacion1:detallePost' posts.id %}">Detalles</a></li>
+              <li><a class="dropdown-item" href="{% url 'Aplicacion1:editarPost' posts.id %}">Editar</a></li>
+              <li><a class="dropdown-item" href="{% url 'Aplicacion1:post_confirm_delete' posts.id %}">Eliminar</a></li>
+            </ul>
+            
+    
+          </div>
+    </div>
+    </div>
+    
+  </div>
+<br>
+<br>
+
+
+
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %}
+
+
+{% block seccion_nombre %}
+<h1>Detalles</h1>    
+
+<h3>Detalles del post:</h3>
+
+{% endblock %}
+{% block cuerpo %}
+
+{% if post.imagen %}
+    <h5>Imagen: </h5>   
+    <img src="{{ post.imagen.url}}" alt="" width="300" height="300" > 
+{% endif %}
+
+<h5>Titulo: </h5><p>{{post.nombrePost}}</p>
+<h5>Contenido: </h5>
+<p>
+{{form.media}}
+{{post.CuerpoPost | safe}}
+</p>
+<h5>Fecha de publicacion: </h5><p>{{post.fechaPublicacion}}</p>
+
+<br>
+<br>
+<a href="{% url 'Aplicacion1:Inicio' %}"><button type="button" class="btn btn-success">Volver a los post</button></a>
+{% endblock %}

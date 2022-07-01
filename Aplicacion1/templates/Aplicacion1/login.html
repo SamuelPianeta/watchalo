@@ -1,0 +1,24 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %} 
+
+
+
+
+{% block section_name %}
+<h1>Ingresar</h1>
+{% endblock %}
+
+{% block cuerpo %}
+    <form action="" method="POST">
+
+    {% csrf_token %}
+
+    {{form.as_p}}
+
+    <button type="submit" > Ingresar </button>
+
+    </form>
+
+    <a href="{% url 'Aplicacion1:registro' %}"><button>No tienes cuenta?</button></a>
+
+{% endblock %}

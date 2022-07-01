@@ -1,0 +1,47 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %}
+
+
+{% block seccion_nombre %}
+<h1>Listado de posts</h1>    
+
+<br>
+<a href="{% url 'Aplicacion1:PostCrear' %}"><button type="button" class="btn btn-primary">Crear nuevo post</button></a>
+<br>
+<br>
+
+{% endblock %}
+{% block cuerpo %}
+
+{% for post in object_list %}
+
+<div class="row">
+    <div class="col-xl-150">
+        <div class="card mb-150">
+            <div class="card-header">
+                <i class="fas fa-plus-square"></i>
+                <ul>
+                    <h4>{{post.nombrePost}}</h4>
+                    
+                    
+                </ul>
+            </div>
+                <h6>
+                    <div>
+                        {{form.media}}
+                        {{post.CuerpoPost}}
+                    </div>    
+                </h6>
+            <div class="card-body"><canvas id="myAreaChart" width="500%" height="40"></canvas></div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+
+
+
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %} 
+
+{% block section_name %}
+    <h1>Ingresar</h1>
+{% endblock %}
+
+{% block cuerpo %}
+    <h1>Bienvenido!</h1>
+    <br>
+    <h3>Ingresa tu informacion</h3>
+    <br>
+    <form action="" method="POST">
+        
+    {% csrf_token %}
+
+    {{form.as_p}}
+
+    <button type="submit" > Registrarse </button>
+
+    </form>
+{% endblock %}
