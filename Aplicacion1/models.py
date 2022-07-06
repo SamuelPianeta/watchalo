@@ -22,7 +22,7 @@ class Post(models.Model):
     CuerpoPost = RichTextField(blank = True, null = True, max_length=5000)
     fechaPublicacion = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User,blank=True,null=True, on_delete=models.CASCADE, related_name = "posts")
-    imagen = models.ImageField(blank = True, null = True, upload_to="imagenes/", verbose_name="Subir imagen")
+    imagen = models.ImageField(blank = True, null = True, upload_to="images/", verbose_name="Subir imagen")
     def __str__(self) -> str:
         return f"{self.user.username}: {self.CuerpoPost}" 
 
