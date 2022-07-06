@@ -1,13 +1,13 @@
-from pathlib import Path
 from .views import creacionPost, detallePost, editarPost, eliminarPost, Inicio, login_request, registro
 from django.contrib.auth.views import LogoutView
 
 from django.urls import path
 
+
 app_name = 'Aplicacion1'
 urlpatterns = [
     path('Inicio/', Inicio.as_view(), name='Inicio'),
-    path('PostCrear/', creacionPost.as_view(), name='PostCrear'),
+    path('PostCrear/', creacionPost, name='PostCrear'),
     #path('leerPost/', leerPost, name='leerPost'),
     path('detallePost/<pk>', detallePost.as_view(), name='detallePost'),
     path('editarPost/<pk>', editarPost.as_view(), name='editarPost'),

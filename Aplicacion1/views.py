@@ -1,8 +1,7 @@
-from dataclasses import fields
-from webbrowser import get
-from django.shortcuts import render
+
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-from Aplicacion1.models import Post
+from Aplicacion1.models import Post, Usuario
 from Aplicacion1.forms import PostForm, UserRegistrationForm
 from django.urls import reverse_lazy
 
@@ -11,6 +10,7 @@ from django.contrib.auth import login, logout, authenticate
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -19,11 +19,24 @@ class Inicio(LoginRequiredMixin,ListView):
     queryset = Post.objects.all().order_by('-fechaPublicacion')
     template_name = 'Aplicacion1/Inicio.html'
 
-class creacionPost(CreateView):
-    model = Post
-    form_class = PostForm
+#class creacionPost(CreateView):
+   # model = Post
+    #form_class = PostForm
     #fields ='__all__'
-    success_url = '/Aplicacion1/Inicio/'
+    #success_url = '/Aplicacion1/Inicio/'
+
+def creacionPost(request):
+    current_user = get_object_or_404(User,pk=request.user.pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post =form.save(commit=False)
+            post.user = current_user
+            post.save()
+            return redirect('Aplicacion1:Inicio')
+    else:
+        form = PostForm()
+    return render(request, 'Aplicacion1/post_form.html', {'form': form})
 
 #def leerPost(request):
     #post = Post.objects.all().order_by('-fechaPublicacion')

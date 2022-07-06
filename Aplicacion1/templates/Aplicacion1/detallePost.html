@@ -14,7 +14,8 @@
     <h5>Imagen: </h5>   
     <img src="{{ post.imagen.url}}" alt="" width="300" height="300" > 
 {% endif %}
-
+viendo: {{user.id}}
+autor: {{post.user.id}}
 <h5>Titulo: </h5><p>{{post.nombrePost}}</p>
 <h5>Contenido: </h5>
 <p>
@@ -22,7 +23,8 @@
 {{post.CuerpoPost | safe}}
 </p>
 <h5>Fecha de publicacion: </h5><p>{{post.fechaPublicacion}}</p>
-
+<h5>Por: </h5>
+<p>{{ post.user.username}}</p>
 <br>
 <br>
 <a href="{% url 'Aplicacion1:Inicio' %}"><button type="button" class="btn btn-success">Volver a los post</button></a>

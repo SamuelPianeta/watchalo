@@ -19,8 +19,9 @@
 
 {% for posts in object_list %}
 
+<h5>by @{{ posts.user.username}}</h5>
 
-<div class="card" style="width: 30rem;">
+<div class="card" style="width: 30rem;" >
     
 
     {% if posts.imagen %}
@@ -29,9 +30,12 @@
     {% endif %}
     <div class="card-body">
       <h5 class="card-title">{{ posts.nombrePost }}</h5>
+      
       <p class="card-text">{{ posts.CuerpoPost |safe}}</p>
       <div style="text-align: right">
         <!----comienza boton dropdown---->
+        {% if user.id == posts.user.id %}
+
         <div class="dropdown">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
               ...
@@ -39,14 +43,16 @@
             <div style="text-align: left">
                 
             </div>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li><a class="dropdown-item" href="{% url 'Aplicacion1:detallePost' posts.id %}">Detalles</a></li>
-              <li><a class="dropdown-item" href="{% url 'Aplicacion1:editarPost' posts.id %}">Editar</a></li>
-              <li><a class="dropdown-item" href="{% url 'Aplicacion1:post_confirm_delete' posts.id %}">Eliminar</a></li>
-            </ul>
+              
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="{% url 'Aplicacion1:detallePost' posts.id %}">Detalles</a></li>
+                <li><a class="dropdown-item" href="{% url 'Aplicacion1:editarPost' posts.id %}">Editar</a></li>
+                <li><a class="dropdown-item" href="{% url 'Aplicacion1:post_confirm_delete' posts.id %}">Eliminar</a></li>
+              </ul>
             
     
           </div>
+          {% endif %}
     </div>
     </div>
     
