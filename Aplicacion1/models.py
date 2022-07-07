@@ -1,7 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+
 
 # Create your models here.
 class Perfil(models.Model):
@@ -28,7 +28,3 @@ class Post(models.Model):
     def __str__(self) -> str:
         return f"{self.user.username}: {self.CuerpoPost}" 
 
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Perfil.objects.create(user = instance)
-post_save.connect(create_profile, sender = User)
