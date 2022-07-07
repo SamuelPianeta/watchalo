@@ -1,10 +1,12 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 # Create your models here.
 class Perfil(models.Model):
     user = models.OneToOneField(User, blank=True,null=True,on_delete=models.CASCADE) 
+    perfilImagen = models.ImageField(default='default_perfil.jpg')
     def __str__(self) -> str:
         return f"Perfil de {self.user.username}"
 
@@ -26,4 +28,7 @@ class Post(models.Model):
     def __str__(self) -> str:
         return f"{self.user.username}: {self.CuerpoPost}" 
 
-    
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Perfil.objects.create(user = instance)
+post_save.connect(create_profile, sender = User)

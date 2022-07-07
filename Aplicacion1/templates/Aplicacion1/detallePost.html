@@ -15,7 +15,9 @@
     <img src="{{ post.imagen.url}}" alt="" width="300" height="300" > 
 {% endif %}
 viendo: {{user.id}}
-autor: {{post.user.id}}
+autor: 
+<img src="{{post.user.perfil.perfilImagen.url }}" alt="" width="300" height="300" > 
+
 <h5>Titulo: </h5><p>{{post.nombrePost}}</p>
 <h5>Contenido: </h5>
 <p>
