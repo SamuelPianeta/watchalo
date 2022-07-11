@@ -13,15 +13,36 @@
         @{{user.username}}
     </h2>
 
+    {% if request.user.is_authenticated %}
+        {% if user.username != request.user.username %}
+            {% if user not in request.user.perfil.following %}
+            <button class="btn btn-secondary"><a class="follow-button" href="{% url 'Aplicacion1:follow' user %}">Follow</a></button>
+            {% else %}
+            <button class="btn btn-dark"><a class="follow-button" href="{% url 'Aplicacion1:unfollow' user %}">Unfollow</a></button>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    
+
 </div>
 <hr>
 
 <div class="follow">
-    <div>
+    <div style = "width:60px; float: left" >
         <h5>posts</h5>
         <p>{{ user.posts.count }}</p>
+    </div>
+    
+    <div style = "width:100px; float: left" >
+        <h5>Viendote</h5>
+        <p>{{ user.perfil.followers.count}}</p>
+    </div>
+    <div style = "width:150px; float: left" >
+        <h5>Viendo</h5>
+        <p>{{ user.perfil.following.count }}</p>
     </div>
 
 </div>
 <hr>
+<a href="{% url 'Aplicacion1:Inicio' %}"><button type="button" class="btn btn-success">Volver</button></a>
 {% endblock %}

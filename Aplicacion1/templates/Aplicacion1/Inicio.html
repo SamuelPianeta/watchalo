@@ -4,9 +4,8 @@
 
 {% block seccion_nombre %}
 <h1>Listado de posts
-  {{mensaje}}
 </h1>    
-
+<h2>{{mensaje}}</h2>
 <br>
 <a href="{% url 'Aplicacion1:PostCrear' %}"><button type="button" class="btn btn-primary">Crear nuevo post</button></a>
 <a href="{% url 'Aplicacion1:Inicio' %}"><button type="button" class="btn btn-light">Refresca</button></a>

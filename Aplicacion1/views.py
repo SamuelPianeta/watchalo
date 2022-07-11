@@ -1,8 +1,9 @@
 
+from pyexpat.errors import messages
 from re import template
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView, DeleteView
-from Aplicacion1.models import Post, Usuario
+from Aplicacion1.models import Post, Relationship
 from Aplicacion1.forms import PostForm, UserRegistrationForm
 from django.urls import reverse_lazy
 
@@ -70,6 +71,24 @@ def perfil(request, username=None):
         user = current_user
     return render (request, 'Aplicacion1/perfil.html', {'posts': posts, 'user': user})
 
+
+def follow(request, username):
+    current_user = request.user
+    to_user = User.objects.get(username=username)
+    to_user_id = to_user
+    rel = Relationship(from_user=current_user, to_user =to_user_id)
+    rel.save()
+    mensaje = f"Siguiendo a {username}" 
+    return render(request, 'Aplicacion1/Inicio.html', {'mensaje': mensaje})
+
+def unfollow(request, username):
+    current_user = request.user
+    to_user = User.objects.get(username=username)
+    to_user_id = to_user
+    rel = Relationship.objects.filter(from_user=current_user.id, to_user_id=to_user_id).get()
+    rel.delete()
+    mensaje = f"Ya no sigues a {username}" 
+    return render(request, 'Aplicacion1/Inicio.html', {'mensaje': mensaje})
 
 
 def login_request(request):
