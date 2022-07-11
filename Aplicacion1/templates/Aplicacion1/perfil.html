@@ -1,0 +1,27 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %}
+
+
+{% block seccion_nombre %}
+
+{% endblock %}
+{% block cuerpo %}
+
+<div class="perfil">
+    <img src="{{user.perfil.perfilImagen.url}}" alt="" width="200" height="200">
+    <h2>
+        @{{user.username}}
+    </h2>
+
+</div>
+<hr>
+
+<div class="follow">
+    <div>
+        <h5>posts</h5>
+        <p>{{ user.posts.count }}</p>
+    </div>
+
+</div>
+<hr>
+{% endblock %}

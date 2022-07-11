@@ -19,13 +19,13 @@
 
 {% for posts in object_list %}
 
-<h5><img src="{{posts.user.perfil.perfilImagen.url }}" alt="" width="50" height="50" >  by @{{ posts.user.username}}</h5>
+<h5><img src="{{posts.user.perfil.perfilImagen.url }}" alt="" width="50" height="50" > <a href="{% url 'Aplicacion1:perfil' posts.user.username %}"> by @{{ posts.user.username}} </a></h5>
 
-<div class="card" style="width: 30rem;" >
+<div class="card-body" style="width: 30rem;" >
     
 
     {% if posts.imagen %}
-      <img src="{{ posts.imagen.url}}" class="rounded float-start" alt="...">
+      <img src="{{ posts.imagen.url }}" class="rounded float-start" alt="..."width="450" height="350">
 
     {% endif %}
     <div class="card-body">

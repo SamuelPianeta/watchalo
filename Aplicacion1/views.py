@@ -1,6 +1,7 @@
 
+from re import template
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import TemplateView, ListView, DetailView, UpdateView, DeleteView
 from Aplicacion1.models import Post, Usuario
 from Aplicacion1.forms import PostForm, UserRegistrationForm
 from django.urls import reverse_lazy
@@ -55,6 +56,19 @@ class editarPost(UpdateView):
 class eliminarPost(DeleteView):
     model = Post
     success_url = '/Aplicacion1/Inicio/'
+
+class error404(TemplateView):
+    template_name = 'Aplicacion1/error_404.html'
+
+def perfil(request, username=None):
+    current_user = request.user
+    if username and username != current_user.username:
+        user = User.objects.get(username=username)
+        posts = user.posts.all()
+    else:
+        posts = current_user.posts.all()
+        user = current_user
+    return render (request, 'Aplicacion1/perfil.html', {'posts': posts, 'user': user})
 
 
 

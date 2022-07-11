@@ -1,8 +1,8 @@
-from .views import creacionPost, detallePost, editarPost, eliminarPost, Inicio, login_request, registro
+from .views import creacionPost, detallePost, editarPost, eliminarPost, Inicio, login_request, registro, perfil, error404
 from django.contrib.auth.views import LogoutView
 
 from django.urls import path
-
+from django.conf.urls import handler400
 
 app_name = 'Aplicacion1'
 urlpatterns = [
@@ -15,4 +15,7 @@ urlpatterns = [
     path('login/', login_request, name='login'),
     path('registro/', registro, name='registro'),
     path('logout/', LogoutView.as_view(template_name='Aplicacion1/logout.html'), name='logout'),
+    path('perfil/<str:username>/', perfil, name='perfil'),
     ]
+
+handler400 = error404.as_view()
