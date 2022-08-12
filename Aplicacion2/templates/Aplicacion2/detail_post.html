@@ -1,0 +1,22 @@
+
+{% extends "Aplicacion1/padre.html" %}
+{% load static %}
+
+{% block seccion_nombre %}
+
+    <h1>Grupo {{ grupo }}</h1>
+    <br>
+    <br>
+{% endblock %}
+
+{% block cuerpo %}
+
+ 
+    <h3>{{ post.nombrePost }}</h3>
+    <p>{{ post.CuerpoPost | safe }}</p>
+    <p>{{post.fechaPublicacion}}</p>
+    <p>{{post.user}}</p>
+    <br>
+    <hr>
+
+{% endblock %}

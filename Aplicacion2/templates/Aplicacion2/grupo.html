@@ -1,0 +1,37 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %}
+
+{% if grupo_posts %}
+
+    {% block seccion_nombre %}
+
+        <h1>Grupo {{ grupo }}</h1>
+        <br>
+        <br>
+        
+        <a href="{% url 'Aplicacion2:post' %}"><button type="button" class="btn btn-primary">Crear nuevo post</button></a> <br><br><hr>
+        
+    {% endblock %}
+
+    {% block cuerpo %}
+        
+
+        {% for post in grupo_posts %}
+
+        {% if post.imagen %}
+            <img src="{{ post.imagen.url }}" class="rounded float-start" alt="..."width="1000" height="450">
+
+        {% endif %}
+
+            <h3>{{ post.nombrePost }}</h3>
+            <p>{{ post.CuerpoPost | safe }}</p>
+            <p>{{post.fechaPublicacion}}</p>
+            <a href="{% url 'Aplicacion1:perfil' request.user.username %}"><p>{{post.user}}</p></a> - <a href="{% url 'Aplicacion2:edit_post' post.id %}">editar</a>
+            <br>
+            <hr>
+        {% endfor %}
+
+    {% endblock %}
+{% else %}
+    <h1>Lo sentimos, la pagina requerida no existe.</h1>
+{% endif %}

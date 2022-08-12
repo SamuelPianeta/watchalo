@@ -1,0 +1,23 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %}
+
+{% block seccion_nombre %}
+
+<h1>Grupos disponibles</h1>
+
+{% endblock %}
+
+
+{% block cuerpo %}
+
+{% for grupos in object_list %}
+
+<a href="{% url 'Aplicacion2:grupo' grupos.nombre %}">{{grupos.nombre}}</a>
+
+<br>
+
+{% endfor %}
+
+{% endblock %}
+
+

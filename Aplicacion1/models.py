@@ -19,6 +19,7 @@ class Perfil(models.Model):
                                  .values_list('from_user_id', flat=True)
         return User.objects.filter(id__in=users_ids)
 class Usuario(models.Model):
+    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
     fechaDeNacimiento = models.DateTimeField()
