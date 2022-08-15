@@ -1,6 +1,5 @@
 
-from pyexpat.errors import messages
-from re import template
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView, DeleteView
 from Aplicacion1.models import Post, Relationship

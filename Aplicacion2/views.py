@@ -1,9 +1,11 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
+
+
 from .models import *
 from django.contrib.auth.models import User
-from django.views.generic import ListView, DetailView, UpdateView
-from Aplicacion2.forms import PostForm
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
+from Aplicacion2.forms import PostForm, GrupoCreateForm
 # Create your views here.
 
 
@@ -36,3 +38,13 @@ class UpdatePostView(UpdateView):
     model = GPost
     form_class = PostForm
     template_name = 'Aplicacion2/edit_post.html'
+
+class DeletePostView(DeleteView):
+    model = GPost
+    template_name = 'Aplicacion2/delete_post.html'
+
+class AddGrupoView(CreateView):
+    model = Grupo
+    template_name = 'Aplicacion2/add_grupo.html'
+    fields = '__all__'
+

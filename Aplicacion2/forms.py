@@ -17,3 +17,13 @@ class PostForm(forms.ModelForm):
             'CuerpoPost': forms.Textarea(attrs={ 'class': 'form-control' }),
 
         }
+
+class GrupoCreateForm(forms.ModelForm):
+    class Meta:
+        model = Grupo
+        fields = ['nombre','detalles']
+
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'detalles': forms.Textarea(attrs={'class': 'form-control'}),
+        }
