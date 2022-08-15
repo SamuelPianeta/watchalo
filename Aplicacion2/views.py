@@ -43,8 +43,20 @@ class DeletePostView(DeleteView):
     model = GPost
     template_name = 'Aplicacion2/delete_post.html'
 
-class AddGrupoView(CreateView):
-    model = Grupo
-    template_name = 'Aplicacion2/add_grupo.html'
-    fields = '__all__'
+#class AddGrupoView(CreateView):
+    #model = Grupo
+    #template_name = 'Aplicacion2/add_grupo.html'
+    #fields = '__all__'
 
+def creacionGrupo(request):
+    current_user = get_object_or_404(User,pk=request.user.pk)
+    if request.method == 'POST':
+        form = GrupoCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            grupo =form.save(commit=False)
+            grupo.creator = current_user
+            grupo.save()
+            return redirect('Aplicacion2:grupos')
+    else:
+        form = GrupoCreateForm()
+    return render(request, 'Aplicacion2/add_grupo.html', {'form': form})

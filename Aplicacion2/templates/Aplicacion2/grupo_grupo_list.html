@@ -14,7 +14,7 @@
 
 {% for grupos in object_list %}
 
-<a href="{% url 'Aplicacion2:grupo' grupos.nombre %}">{{grupos.nombre}}</a>
+<a href="{% url 'Aplicacion2:grupo' grupos.nombre %}">{{grupos.nombre}} - {{grupos.creator}}</a>
 
 <br>
 
