@@ -17,18 +17,20 @@ def grupoView(request, gru):
     grupo_posts = GPost.objects.filter( grupo = gru).order_by('-fechaPublicacion')
     return render(request, 'Aplicacion2/grupo.html', {'grupo': gru, 'grupo_posts': grupo_posts})
 
-def creacionPost(request):
+def creacionPost(request, gru):
+    grupo_posts = GPost.objects.filter( grupo = gru)
     current_user = get_object_or_404(User,pk=request.user.pk)
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post =form.save(commit=False)
+            post.grupo = gru
             post.user = current_user
             post.save()
             return redirect('Aplicacion2:grupos')
     else:
         form = PostForm()
-    return render(request, 'Aplicacion2/post_grupo_form.html', {'form': form})
+    return render(request, 'Aplicacion2/post_grupo_form.html', {'form': form,'grupo': gru, 'grupo_posts': grupo_posts })
 
 class DetailPostView(DetailView):
     model = GPost

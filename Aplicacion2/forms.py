@@ -9,10 +9,10 @@ for item in choices:
 class PostForm(forms.ModelForm):
     class Meta:
         model = GPost
-        fields = ['nombrePost', 'CuerpoPost','grupo', 'imagen'] 
+        fields = ['nombrePost', 'CuerpoPost', 'imagen'] 
 
         widgets = {
-            'grupo': forms.Select(choices = choice_list, attrs={ 'class': 'form-control' }),
+            #'grupo': forms.Select(choices = choice_list, attrs={ 'class': 'form-control' }),
             'nombrePost': forms.TextInput(attrs={ 'class': 'form-control' }),
             'CuerpoPost': forms.Textarea(attrs={ 'class': 'form-control' }),
 
