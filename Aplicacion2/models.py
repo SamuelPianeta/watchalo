@@ -22,7 +22,7 @@ class GPost(models.Model):
     user = models.ForeignKey(User,blank=True,null=True, on_delete=models.CASCADE, related_name = "post")
     imagen = models.ImageField(blank = True, null = True, upload_to="images/", verbose_name="Subir imagen")
     grupo = models.CharField(max_length=255, default='Random')
-    g = models.ForeignKey(Grupo, blank = True, null = True, on_delete=models.CASCADE)
+    
     def __str__(self) -> str:
         return self.user.username +"/" + self.CuerpoPost
 

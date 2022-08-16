@@ -36,15 +36,13 @@
                     
                     {% if request.user.is_authenticated %}
  
-                        <li><a class="dropdown-item" href="#!"><p>{{user.username }}</p>
+                        <li><a class="dropdown-item" href="{% url 'Aplicacion1:perfil' user.username %}"><p>{{user.username }}</p>
                         </a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="{%url 'Aplicacion1:logout' %}">Logout</a></li>
                     {% else %}
-                            
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="{%url 'Aplicacion1:login' %}">Login</a></li>
                         
