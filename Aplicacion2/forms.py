@@ -21,7 +21,7 @@ class PostForm(forms.ModelForm):
 class GrupoCreateForm(forms.ModelForm):
     class Meta:
         model = Grupo
-        fields = ['nombre','detalles']
+        fields = ['nombre','detalles', 'imagen']
 
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),

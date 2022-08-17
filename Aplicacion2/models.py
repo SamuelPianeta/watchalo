@@ -9,6 +9,8 @@ class Grupo(models.Model):
     creator = models.ForeignKey(User,blank = True, null=True, verbose_name="creator", on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255,blank=True, null=True,)
     detalles = models.CharField(max_length=255,blank=True, null=True,)
+    imagen = models.ImageField(blank = True, null = True, upload_to="images/", verbose_name="Subir imagen", default ="grupos_default_img")
+
     def __str__(self):
         return self.nombre + " " + str(self.id)
     def get_absolute_url(self):

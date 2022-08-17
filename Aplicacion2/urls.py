@@ -12,4 +12,6 @@ urlpatterns = [
     path('post/edit/<int:pk>', UpdatePostView.as_view(), name = 'edit_post'),
     path('post/delete/<int:pk>', DeletePostView.as_view(), name = 'delete_post'),
     path('grupos/add/new/', creacionGrupo, name = 'add_grupo'),
+    path('grupos/edit/<int:pk>', UpdateGrupoView.as_view(), name = 'edit_grupo'),
+    path('grupos/delete/<int:pk>', DeleteGrupoView.as_view(), name = 'delete_grupo'),
     ]

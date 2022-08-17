@@ -6,6 +6,7 @@ from .models import *
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from Aplicacion2.forms import PostForm, GrupoCreateForm
+from django.urls import reverse_lazy
 # Create your views here.
 
 
@@ -44,6 +45,7 @@ class UpdatePostView(UpdateView):
 class DeletePostView(DeleteView):
     model = GPost
     template_name = 'Aplicacion2/delete_post.html'
+    success_url = reverse_lazy('Aplicacion2:grupos')
 
 #class AddGrupoView(CreateView):
     #model = Grupo
@@ -62,3 +64,13 @@ def creacionGrupo(request):
     else:
         form = GrupoCreateForm()
     return render(request, 'Aplicacion2/add_grupo.html', {'form': form})
+
+class UpdateGrupoView(UpdateView):
+    model = Grupo
+    form_class = GrupoCreateForm
+    template_name = 'Aplicacion2/editarGrupo.html'
+
+class DeleteGrupoView(DeleteView):
+    model = Grupo
+    template_name = 'Aplicacion2/deleteGrupo.html'
+    success_url = reverse_lazy('Aplicacion2:grupos')

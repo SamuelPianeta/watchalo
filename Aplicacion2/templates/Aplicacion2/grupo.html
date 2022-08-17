@@ -19,10 +19,9 @@
 
         {% for post in grupo_posts %}
 
-        {% if post.imagen %}
-            <img src="{{ post.imagen.url }}" class="rounded float-start" alt="..."width="1000" height="450">
-
-        {% endif %}
+            {% if post.imagen %}
+                <img src="{{ post.imagen.url }}" class="rounded float-start" alt="..."width="1000" height="450">
+            {% endif %}
 
             <h3>{{ post.nombrePost }}</h3>
             <p>{{ post.CuerpoPost | safe }}</p>
