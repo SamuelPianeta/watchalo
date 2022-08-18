@@ -25,11 +25,13 @@
       <h5 class="card-title">{{grupos.nombre}}</h5>
       <p class="card-text">{{grupos.detalles}}</p>
       <a href="{% url 'Aplicacion2:grupo' grupos.nombre %}" class="btn btn-primary">Entrar</a>
-      {% if grupos.creator.id == user.id %}
-        <a href="{% url 'Aplicacion2:edit_grupo' grupos.id %}" class="btn btn-secondary">Edit</a>
-        <a href="{% url 'Aplicacion2:delete_grupo' grupos.id %}" class="btn btn-danger">Borrar</a>
+      {% if request.user.is_authenticated %}
+
+        {% if grupos.creator.id == user.id %}
+          <a  href="{% url 'Aplicacion2:edit_grupo' grupos.id %}" class="btn btn-secondary">Edit</a>
+          <a href="{% url 'Aplicacion2:delete_grupo' grupos.id %}" class="btn btn-danger">Borrar</a>
+        {% endif %}
       {% endif %}
-      
 
     </div>
     

@@ -18,6 +18,7 @@ def grupoView(request, gru):
     grupo_posts = GPost.objects.filter( grupo = gru).order_by('-fechaPublicacion')
     return render(request, 'Aplicacion2/grupo.html', {'grupo': gru, 'grupo_posts': grupo_posts})
 
+
 def creacionPost(request, gru):
     grupo_posts = GPost.objects.filter( grupo = gru)
     current_user = get_object_or_404(User,pk=request.user.pk)
@@ -41,6 +42,7 @@ class UpdatePostView(UpdateView):
     model = GPost
     form_class = PostForm
     template_name = 'Aplicacion2/edit_post.html'
+
 
 class DeletePostView(DeleteView):
     model = GPost
