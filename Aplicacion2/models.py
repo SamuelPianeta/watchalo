@@ -23,6 +23,8 @@ class GPost(models.Model):
     fechaPublicacion = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User,blank=True,null=True, on_delete=models.CASCADE, related_name = "post")
     imagen = models.ImageField(blank = True, null = True, upload_to="images/", verbose_name="Subir imagen")
+    video = models.FileField(blank = True, null = True, upload_to="videos/", verbose_name="Subir video")
+
     grupo = models.CharField(max_length=255, default='Random')
     
     def __str__(self) -> str:

@@ -23,6 +23,12 @@
                 <img src="{{ post.imagen.url }}" class="rounded float-start" alt="..."width="1000" height="450">
             {% endif %}
 
+            {% if post.video %}
+                <video width="1000" height="450" class="embed-responsive embed-responsive-16by9" controls="controls">
+                    <source src="{{ post.video.url }}" type="video/mp4"/>
+                </video>
+            {% endif %}
+
             <h3>{{ post.nombrePost }}</h3>
             <p>{{ post.CuerpoPost | safe }}</p>
             <p>{{post.fechaPublicacion}}</p>

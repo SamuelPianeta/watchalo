@@ -9,7 +9,7 @@ for item in choices:
 class PostForm(forms.ModelForm):
     class Meta:
         model = GPost
-        fields = ['nombrePost', 'CuerpoPost', 'imagen'] 
+        fields = ['nombrePost', 'CuerpoPost', 'imagen', 'video'] 
 
         widgets = {
             #'grupo': forms.Select(choices = choice_list, attrs={ 'class': 'form-control' }),
