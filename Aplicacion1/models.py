@@ -34,8 +34,16 @@ class Post(models.Model):
     fechaPublicacion = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User,blank=True,null=True, on_delete=models.CASCADE, related_name = "posts")
     imagen = models.ImageField(blank = True, null = True, upload_to="images/", verbose_name="Subir imagen")
+    video = models.FileField(blank = True, null = True, upload_to="videos/", verbose_name="Subir video")
+    likes = models.ManyToManyField(User, related_name="blog_post", blank = True, null = True)
+    
+    def total_likes(self):
+        return self.likes.count()
+        
     def __str__(self) -> str:
         return f"{self.user.username}: {self.CuerpoPost}" 
+    
+    
 
 class Relationship(models.Model):
     from_user = models.ForeignKey(User, related_name="relationships", on_delete=models.CASCADE)

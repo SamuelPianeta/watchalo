@@ -1,4 +1,4 @@
-from .views import creacionPost, detallePost, editarPost, eliminarPost, Inicio, login_request, registro, perfil, error404, follow, unfollow
+from .views import LikeView, creacionPost, detallePost, editarPost, eliminarPost, Inicio, login_request, registro, perfil, error404, follow, unfollow
 from django.contrib.auth.views import LogoutView
 
 from django.urls import path
@@ -18,6 +18,7 @@ urlpatterns = [
     path('perfil/<str:username>/', perfil, name='perfil'),
     path('follow/<str:username>/', follow, name='follow'),
     path('unfollow/<str:username>/', unfollow, name='unfollow'),
+    path('like/<int:pk>', LikeView, name='like_post'),
     ]
 
 handler400 = error404.as_view()

@@ -28,9 +28,22 @@
       width="1000" height="450">
 
     {% endif %}
+    {% if posts.video %}
+      <video width="1000" height="450" class="embed-responsive embed-responsive-16by9" controls="controls">
+        <source src="{{ posts.video.url }}" type="video/mp4"/>
+      </video>
+    {% endif %}
     <div>
       <h5>{{ posts.nombrePost }}</h5>    
       <p>{{ posts.CuerpoPost |safe}}</p>
+
+      <br><br>
+      <form action="{% url 'Aplicacion1:like_post' posts.pk %}" method="POST" >
+        {% csrf_token %}
+
+        <button type="submit", name = "post_id", value ="{{ posts.id }}" class="btn btn-primary btn-sm"> like</button>
+
+      </form>
       <div style="text-align: right">
         <!----comienza boton dropdown---->
         {% if user.id == posts.user.id %}
