@@ -1,11 +1,12 @@
 
-from pyexpat.errors import messages
-from re import template
+
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView, DeleteView
 from Aplicacion1.models import Post, Relationship
 from Aplicacion1.forms import PostForm, UserRegistrationForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -20,12 +21,6 @@ class Inicio(LoginRequiredMixin,ListView):
     model = Post
     queryset = Post.objects.all().order_by('-fechaPublicacion')
     template_name = 'Aplicacion1/Inicio.html'
-
-#class creacionPost(CreateView):
-   # model = Post
-    #form_class = PostForm
-    #fields ='__all__'
-    #success_url = '/Aplicacion1/Inicio/'
 
 def creacionPost(request):
     current_user = get_object_or_404(User,pk=request.user.pk)
@@ -126,3 +121,9 @@ def registro(request):
         form = UserRegistrationForm
 
     return render(request, 'Aplicacion1/registro.html', {'form': form})
+
+
+def LikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('Aplicacion1:Inicio'))

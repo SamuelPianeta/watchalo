@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('nombrePost', 'CuerpoPost', 'imagen')
+        fields = ('nombrePost', 'CuerpoPost', 'imagen', 'video')
 
         widgets = {
             'nombrePost': forms.TextInput(attrs={ 'class': 'form-control' }),

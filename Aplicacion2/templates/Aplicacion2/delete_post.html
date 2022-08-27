@@ -1,0 +1,32 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %}
+
+
+{% block seccion_nombre %}
+
+
+<div class="col-xl-10 col-md-6">
+    <div class="card bg-warning text-white mb-4">
+        <div class="card-body">Si eliminas este elemento no lo podras recuperar: {{gpost.nombrePost}}</div>
+        <div class="card-footer d-flex align-items-center justify-content-between">
+            <a class="small text-white stretched-link" href="#">Mas...</a>
+            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block cuerpo %}
+<div class="card">
+    <div class="card-body">
+        <form method="POST" >{% csrf_token %}
+            estas seguro de eliminar: {{gpost.nombrePost}}
+            <button type="submit" class="btn btn-danger">Si</button>
+            <a href="{% url 'Aplicacion2:grupos' %}"><button type="button" class="btn btn-success">Cancelar</button>
+            </a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %}
+
+{% block seccion_nombre %}
+
+<h1>Grupos disponibles</h1>
+
+<a href="{% url 'Aplicacion2:add_grupo'%}"><button type="button" class="btn btn-primary">Crear grupo</button></a>
+
+{% endblock %}
+
+
+{% block cuerpo %}
+
+{% for grupos in object_list %}
+
+
+
+<br>
+<div class="card">
+    {% if grupos.imagen %}
+      <img src="{{ grupos.imagen.url }}" class="card-img-top" alt="..." width="1000" height="450">
+    {% endif %}  
+    <div class="card-body">
+      <h5 class="card-title">{{grupos.nombre}}</h5>
+      <p class="card-text">{{grupos.detalles}}</p>
+      <a href="{% url 'Aplicacion2:grupo' grupos.nombre %}" class="btn btn-primary">Entrar</a>
+      {% if request.user.is_authenticated %}
+
+        {% if grupos.creator.id == user.id %}
+          <a  href="{% url 'Aplicacion2:edit_grupo' grupos.id %}" class="btn btn-secondary">Edit</a>
+          <a href="{% url 'Aplicacion2:delete_grupo' grupos.id %}" class="btn btn-danger">Borrar</a>
+        {% endif %}
+      {% endif %}
+
+    </div>
+    
+</div>
+
+{% endfor %}
+
+{% endblock %}
+
+

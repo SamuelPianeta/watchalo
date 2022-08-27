@@ -20,17 +20,30 @@
 
 <h5><img src="{{posts.user.perfil.perfilImagen.url }}" alt="" width="50" height="50" > <a href="{% url 'Aplicacion1:perfil' posts.user.username %}"> by @{{ posts.user.username}} </a></h5>
 
-<div class="card-body" style="width: 30rem;" >
+<div>
     
 
     {% if posts.imagen %}
-      <img src="{{ posts.imagen.url }}" class="rounded float-start" alt="..."width="450" height="350">
+      <img src="{{ posts.imagen.url }}" class="rounded float-start" alt="..." 
+      width="1000" height="450">
 
     {% endif %}
-    <div class="card-body">
-      <h5 class="card-title">{{ posts.nombrePost }}</h5>
-      
-      <p class="card-text">{{ posts.CuerpoPost |safe}}</p>
+    {% if posts.video %}
+      <video width="1000" height="450" class="embed-responsive embed-responsive-16by9" controls="controls">
+        <source src="{{ posts.video.url }}" type="video/mp4"/>
+      </video>
+    {% endif %}
+    <div>
+      <h5>{{ posts.nombrePost }}</h5>    
+      <p>{{ posts.CuerpoPost |safe}}</p>
+
+      <br><br>
+      <form action="{% url 'Aplicacion1:like_post' posts.pk %}" method="POST" >
+        {% csrf_token %}
+
+        <button type="submit", name = "post_id", value ="{{ posts.id }}" class="btn btn-primary btn-sm"> like</button>
+
+      </form>
       <div style="text-align: right">
         <!----comienza boton dropdown---->
         {% if user.id == posts.user.id %}
