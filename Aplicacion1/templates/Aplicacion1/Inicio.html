@@ -64,15 +64,28 @@
     
           </div>
           {% endif %}
-          <strong>Comentarios</strong>
+          <h5 style = "width:500px; float: center">Comentarios</h5>
           <hr>
           
           {% if not posts.comments.all %}
-            No hay comentarios <a href="{% url 'Aplicacion1:add_comentario' posts.pk %}"> Comentar</a>
-          
+          <a style = "width:60px; float: left" href="{% url 'Aplicacion1:add_comentario' posts.pk %}">
+            <button type="button" class="btn btn-primary">Comentar</button>
+          </a> 
+          <br><br>          
           {% else %}
-            <a href="{% url 'Aplicacion1:add_comentario' posts.pk %}"> Comentar</a> <br><br>
-            {% for comment in posts.comments.all %}
+            <a style = "width:60px; float: left" href="{% url 'Aplicacion1:add_comentario' posts.pk %}">
+              <button type="button" class="btn btn-primary">Comentar</button>
+            </a> 
+            <br><br>
+            <p>
+              <a style = "width:110px; float: left" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Comentarios
+              </a>
+              <br><br>
+            </p>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                {% for comment in posts.comments.all %}
 
               <strong>
                 {{comment.name}} -
@@ -82,6 +95,9 @@
               {{comment.body}} 
               <br><br>           
             {% endfor %}
+              </div>
+            </div>
+            
           {% endif %}
     </div>
     </div>
