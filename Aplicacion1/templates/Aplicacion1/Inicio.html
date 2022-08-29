@@ -33,17 +33,16 @@
         <source src="{{ posts.video.url }}" type="video/mp4"/>
       </video>
     {% endif %}
+
+
     <div>
       <h5>{{ posts.nombrePost }}</h5>    
       <p>{{ posts.CuerpoPost |safe}}</p>
 
       <br><br>
-      <form action="{% url 'Aplicacion1:like_post' posts.pk %}" method="POST" >
-        {% csrf_token %}
+      
 
-        <button type="submit", name = "post_id", value ="{{ posts.id }}" class="btn btn-primary btn-sm"> like</button>
 
-      </form>
       <div style="text-align: right">
         <!----comienza boton dropdown---->
         {% if user.id == posts.user.id %}
@@ -65,13 +64,32 @@
     
           </div>
           {% endif %}
+          <strong>Comentarios</strong>
+          <hr>
+          
+          {% if not posts.comments.all %}
+            No hay comentarios <a href="{% url 'Aplicacion1:add_comentario' posts.pk %}"> Comentar</a>
+          
+          {% else %}
+            <a href="{% url 'Aplicacion1:add_comentario' posts.pk %}"> Comentar</a> <br><br>
+            {% for comment in posts.comments.all %}
+
+              <strong>
+                {{comment.name}} -
+                {{comment.date}}
+              </strong>
+              <br>
+              {{comment.body}} 
+              <br><br>           
+            {% endfor %}
+          {% endif %}
     </div>
     </div>
     
   </div>
 <br>
 <br>
-<hr>
+<strong><hr></strong>
 
 
 {% endfor %}

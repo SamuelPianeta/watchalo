@@ -29,21 +29,29 @@ class Usuario(models.Model):
         return self.nombre +' '+ self.apellido
 
 class Post(models.Model):
-    nombrePost = models.CharField(max_length=50)
-    CuerpoPost = RichTextField(blank = True, null = True, max_length=5000)
+    nombrePost = models.CharField(max_length=50, verbose_name = 'Titulo')
+    CuerpoPost = RichTextField(blank = True, null = True, max_length=5000, verbose_name = 'Contenido')
     fechaPublicacion = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User,blank=True,null=True, on_delete=models.CASCADE, related_name = "posts")
     imagen = models.ImageField(blank = True, null = True, upload_to="images/", verbose_name="Subir imagen")
     video = models.FileField(blank = True, null = True, upload_to="videos/", verbose_name="Subir video")
-    likes = models.ManyToManyField(User, related_name="blog_post", blank = True, null = True)
+    likes = models.ManyToManyField(User, related_name="likes", blank = True, null = True)
+    dislikes = models.ManyToManyField(User, related_name="dislikes", blank = True, null = True)
+
     
-    def total_likes(self):
-        return self.likes.count()
+    
         
     def __str__(self) -> str:
         return f"{self.user.username}: {self.CuerpoPost}" 
-    
-    
+
+class comments(models.Model):
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    body = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s - %s' % (self.post.nombrePost, self.name)    
 
 class Relationship(models.Model):
     from_user = models.ForeignKey(User, related_name="relationships", on_delete=models.CASCADE)

@@ -7,5 +7,6 @@ admin.site.register(Usuario)
 admin.site.register(Post)
 admin.site.register(Perfil)
 admin.site.register(Relationship)
+admin.site.register(comments)
 
 

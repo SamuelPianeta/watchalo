@@ -2,9 +2,9 @@
 
 
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import TemplateView, ListView, DetailView, UpdateView, DeleteView
-from Aplicacion1.models import Post, Relationship
-from Aplicacion1.forms import PostForm, UserRegistrationForm
+from django.views.generic import TemplateView, ListView, DetailView, UpdateView, DeleteView, CreateView
+from Aplicacion1.models import Post, Relationship, comments
+from Aplicacion1.forms import PostForm, UserRegistrationForm,CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
@@ -35,6 +35,16 @@ def creacionPost(request):
         form = PostForm()
     return render(request, 'Aplicacion1/post_form.html', {'form': form})
 
+class agregarComentario(CreateView):
+    model = comments
+    form_class = CommentForm
+    template_name = 'Aplicacion1/add_comentario.html'
+    #fields = '__all__'
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+    success_url = '/Aplicacion1/Inicio/'
 #def leerPost(request):
     #post = Post.objects.all().order_by('-fechaPublicacion')
     #contexto = {'post': post}
@@ -123,7 +133,4 @@ def registro(request):
     return render(request, 'Aplicacion1/registro.html', {'form': form})
 
 
-def LikeView(request, pk):
-    post = get_object_or_404(Post, id=request.POST.get('post_id'))
-    post.likes.add(request.user)
-    return HttpResponseRedirect(reverse('Aplicacion1:Inicio'))
+
