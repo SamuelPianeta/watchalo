@@ -3,7 +3,7 @@
 
 
 {% block seccion_nombre %}
-<h1>Comentario</h1>              
+<h1>Editar comentario</h1>              
 {% endblock %}
 {% block cuerpo %}
 
@@ -11,7 +11,7 @@
     {% csrf_token %}
     
     {{form.as_p}}
-    <input type="submit" class="btn btn-success" value="Subir post">
+    <input type="submit" class="btn btn-success" value="Editar comentario">
 </form>
 <br>
 <a href="{% url 'Aplicacion1:Inicio' %}"><button type="button" class="btn btn-primary">Cancelar, volver al inicio</button></a>
