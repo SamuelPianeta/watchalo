@@ -41,9 +41,12 @@ class agregarComentario(CreateView):
     template_name = 'Aplicacion1/add_comentario.html'
     #fields = '__all__'
 
+
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
+        form.instance.name = self.request.user.username
         return super().form_valid(form)
+
     success_url = '/Aplicacion1/Inicio/'
 #def leerPost(request):
     #post = Post.objects.all().order_by('-fechaPublicacion')

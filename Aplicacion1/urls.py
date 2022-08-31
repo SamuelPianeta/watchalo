@@ -20,7 +20,7 @@ urlpatterns = [
     path('unfollow/<str:username>/', unfollow, name='unfollow'),
     #path('like/<int:pk>',addLike.as_view(), name='like'),
    # path('dislike/<int:pk>/',addDislike.as_view(), name='dislike')
-    path('coment/<int:pk>', agregarComentario.as_view(), name='add_comentario'),
+    path('coment/<int:pk>/', agregarComentario.as_view(), name='add_comentario'),
     ]
 
 handler400 = error404.as_view()

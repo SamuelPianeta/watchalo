@@ -88,6 +88,7 @@
                 {% for comment in posts.comments.all %}
 
               <strong>
+                {{comment.user.name}} -
                 {{comment.name}} -
                 {{comment.date}}
               </strong>
