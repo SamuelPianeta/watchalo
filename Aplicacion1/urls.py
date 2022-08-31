@@ -1,4 +1,4 @@
-from .views import creacionPost, detallePost, editarPost, eliminarPost, Inicio, login_request, registro, perfil, error404, follow, unfollow, agregarComentario
+from .views import creacionPost, detallePost, editarPost, eliminarPost, Inicio, login_request, registro, perfil, error404, follow, unfollow, agregarComentario, editarComentario, eliminarComentario
 from django.contrib.auth.views import LogoutView
 
 from django.urls import path
@@ -21,6 +21,8 @@ urlpatterns = [
     #path('like/<int:pk>',addLike.as_view(), name='like'),
    # path('dislike/<int:pk>/',addDislike.as_view(), name='dislike')
     path('coment/<int:pk>/', agregarComentario.as_view(), name='add_comentario'),
+    path('coment/<int:pk>/edit/', editarComentario.as_view(), name='edit_comentario'),
+    path('coment/<int:pk>/delete/', eliminarComentario.as_view(), name='delete_comentario'),
     ]
 
 handler400 = error404.as_view()

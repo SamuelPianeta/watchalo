@@ -15,7 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-# Create your views here.
+# Muro principal / CRUD de posts------------------------------------------------------------------------
 
 class Inicio(LoginRequiredMixin,ListView):
     model = Post
@@ -35,24 +35,6 @@ def creacionPost(request):
         form = PostForm()
     return render(request, 'Aplicacion1/post_form.html', {'form': form})
 
-class agregarComentario(CreateView):
-    model = comments
-    form_class = CommentForm
-    template_name = 'Aplicacion1/add_comentario.html'
-    #fields = '__all__'
-
-
-    def form_valid(self, form):
-        form.instance.post_id = self.kwargs['pk']
-        form.instance.name = self.request.user.username
-        return super().form_valid(form)
-
-    success_url = '/Aplicacion1/Inicio/'
-#def leerPost(request):
-    #post = Post.objects.all().order_by('-fechaPublicacion')
-    #contexto = {'post': post}
-    #return render(request, 'Aplicacion1/leerPost.html', contexto)
-
 class  detallePost(DetailView):
     model = Post
     template_name = 'Aplicacion1/detallePost.html'
@@ -69,6 +51,9 @@ class eliminarPost(DeleteView):
 class error404(TemplateView):
     template_name = 'Aplicacion1/error_404.html'
 
+
+# Perfil y follows(viendo/viendote)---------------------------------------------------------------------
+
 def perfil(request, username=None):
     current_user = request.user
     if username and username != current_user.username:
@@ -78,7 +63,6 @@ def perfil(request, username=None):
         posts = current_user.posts.all()
         user = current_user
     return render (request, 'Aplicacion1/perfil.html', {'posts': posts, 'user': user})
-
 
 def follow(request, username):
     current_user = request.user
@@ -98,6 +82,34 @@ def unfollow(request, username):
     mensaje = f"Ya no sigues a {username}" 
     return render(request, 'Aplicacion1/Inicio.html', {'mensaje': mensaje})
 
+# Comentarios ------------------------------------------------------------------------------------------
+
+class agregarComentario(CreateView):
+    model = comments
+    form_class = CommentForm
+    template_name = 'Aplicacion1/add_comentario.html'
+    #fields = '__all__'
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        form.instance.name = self.request.user.username
+        form.instance.user_id = self.request.user.id
+        return super().form_valid(form)
+
+    success_url = '/Aplicacion1/Inicio/'
+
+
+class editarComentario(UpdateView):
+    model = comments 
+    success_url ='/Aplicacion1/Inicio/'
+    fields = ['body']
+
+class eliminarComentario(DeleteView):
+    model = comments
+    success_url = '/Aplicacion1/Inicio/'
+
+
+# Login y registro --------------------------------------------------------------------------------------
 
 def login_request(request):
     if request.method == 'POST':

@@ -45,6 +45,7 @@ class Post(models.Model):
         return f"{self.user.username}: {self.CuerpoPost}" 
 
 class comments(models.Model):
+    id = models.AutoField(primary_key=True)
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     user = models.ForeignKey(User,blank=True,null=True, on_delete=models.CASCADE, related_name = "usuario")
     name = models.CharField(max_length=255)

@@ -1,0 +1,22 @@
+{% extends "Aplicacion1/Padre.html" %}
+{% load static %}
+
+
+{% block seccion_nombre %}
+<h1>Editar comentario</h1>              
+{% endblock %}
+{% block cuerpo %}
+
+<form method="POST" >
+    {% csrf_token %}
+    
+    {{form.as_p}}
+    <input type="submit" class="btn btn-success" value="Editar comentario">
+</form>
+<br>
+<a href="{% url 'Aplicacion1:Inicio' %}"><button type="button" class="btn btn-primary">Cancelar, volver al inicio</button></a>
+
+
+
+
+{% endblock %}
