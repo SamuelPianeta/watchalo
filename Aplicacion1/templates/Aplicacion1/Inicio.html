@@ -88,6 +88,12 @@
                 {% for comment in posts.comments.all %}
 
               <strong>
+                {% if comment.user_id == user.id %}
+                  <a href="{% url 'Aplicacion1:edit_comentario' comment.pk %}" >Editar -</a>
+                  <a href="{% url 'Aplicacion1:delete_comentario' comment.pk %}" >Eliminar -</a>
+                {% endif %}
+
+
                 {{comment.user.name}} -
                 {{comment.name}} -
                 {{comment.date}}
