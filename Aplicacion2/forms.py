@@ -1,5 +1,6 @@
+from turtle import width
 from django import forms
-from .models import GPost, Grupo
+from .models import GPost, Grupo, GComments
 
 choices = Grupo.objects.all().values_list('nombre', 'nombre')
 choice_list= []
@@ -26,4 +27,13 @@ class GrupoCreateForm(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
             'detalles': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+class GrupoCommentForm(forms.ModelForm):
+    class Meta:
+        model = GComments
+        fields = ['body']
+
+        widgets = {
+            'body': forms.Textarea(attrs={'class': 'form-control'}),
         }

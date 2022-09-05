@@ -34,12 +34,49 @@
             <p>{{post.fechaPublicacion}}</p>
             <p><a href="{% url 'Aplicacion1:perfil' request.user.username %}"><p>{{post.user}}</p></a> 
             {% if post.user.id == user.id %}
-                - <a href="{% url 'Aplicacion2:edit_post' post.id %}">editar</a>- <a href="{% url 'Aplicacion2:delete_post' post.id %}">Borrar</a>
+                 <a href="{% url 'Aplicacion2:edit_post' post.id %}">editar</a>- 
+                  <a href="{% url 'Aplicacion2:delete_post' post.id %}">Borrar</a>
             {% endif %}
-            <br>
-            <hr>
-        {% endfor %}
+<!-- Aquí puedes comienzan los comentarios -->
+            <br><br>
 
+            <p>
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Comentarios
+                </a>
+                <a href="{% url 'Aplicacion2:add_g_comment' post.pk%}">
+                <button class="btn btn-primary" type="button">
+                Comentar
+                </button>
+                </a>
+            </p>
+            {% if not post.Gcomments.all %}
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        No hay comentarios aun...
+                    </div>
+                </div>
+
+            {% else %}
+
+                {% for comment in post.Gcomments.all %}
+
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            {{comment.user.username}} <br>
+                            {{comment.body}}
+                        </div>
+                    </div>
+                {% endfor %}
+
+            {% endif %}
+
+
+
+
+            <hr>
+           
+        {% endfor %}
     {% endblock %}
 {% else %}
     <h1>Lo sentimos, la pagina requerida no existe.</h1>

@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
-from Aplicacion2.forms import PostForm, GrupoCreateForm
+from Aplicacion2.forms import PostForm, GrupoCreateForm, GrupoCommentForm
 from django.urls import reverse_lazy
 # Create your views here.
 
@@ -76,3 +76,18 @@ class DeleteGrupoView(DeleteView):
     model = Grupo
     template_name = 'Aplicacion2/deleteGrupo.html'
     success_url = reverse_lazy('Aplicacion2:grupos')
+
+# grupo comentarios ---------------------------------------------------------------------------
+
+class AgregarGrupoComentario(CreateView):
+    model = GComments
+    form_class = GrupoCommentForm
+    template_name = 'Aplicacion2/add_g_comentario.html'
+
+    def form_valid(self, form):
+        form.instance.gpost_id = self.kwargs['pk']
+        form.instance.name = self.request.user.username
+        form.instance.user_id = self.request.user.id
+        return super().form_valid(form)
+
+    success_url = '/Aplicacion2/grupos/'

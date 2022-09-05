@@ -5,5 +5,6 @@ from .models import *
 
 admin.site.register(Grupo)
 admin.site.register(GPost)
+admin.site.register(GComments)
 
 
