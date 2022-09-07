@@ -88,7 +88,7 @@ class agregarComentario(CreateView):
     model = comments
     form_class = CommentForm
     template_name = 'Aplicacion1/add_comentario.html'
-    #fields = '__all__'
+
 
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']

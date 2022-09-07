@@ -20,7 +20,8 @@
         {% for post in grupo_posts %}
 
             {% if post.imagen %}
-                <img src="{{ post.imagen.url }}" class="rounded float-start" alt="..."width="1000" height="450">
+                <img src="{{ post.imagen.url }}" class="rounded float-start" alt="..."width="1000" height="450"> 
+                <br><br> <hr>
             {% endif %}
 
             {% if post.video %}
@@ -69,6 +70,7 @@
                             {% if comment.user.id == user.id %}
 
                                 <a href="{% url 'Aplicacion2:edit_g_comment' comment.id %}">Editar</a>
+                                <a href="{% url 'Aplicacion2:delete_g_comment' comment.id %}">Eliminar</a>
 
                             {% endif %}
 

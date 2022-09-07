@@ -85,16 +85,23 @@ class AgregarGrupoComentario(CreateView):
     model = GComments
     form_class = GrupoCommentForm
     template_name = 'Aplicacion2/add_g_comentario.html'
+    
 
     def form_valid(self, form):
         form.instance.gpost_id = self.kwargs['pk']
         form.instance.name = self.request.user.username
         form.instance.user_id = self.request.user.id
+       
         return super().form_valid(form)
-
+    
     success_url = '/Aplicacion2/grupos/'
 
 class EditarGrupoComentario(UpdateView):
     model = GComments
     success_url = '/Aplicacion2/grupos/'
     fields = ['body']
+
+class EliminarGrupoComentario(DeleteView):
+    model = GComments
+    template_name ='Aplicacion2/deleteComentarioGrupo.html'
+    success_url = reverse_lazy('Aplicacion2:grupos')
