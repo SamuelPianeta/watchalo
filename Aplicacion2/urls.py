@@ -16,4 +16,5 @@ urlpatterns = [
     path('grupos/edit/<int:pk>', login_required(UpdateGrupoView.as_view()), name = 'edit_grupo'),
     path('grupos/delete/<int:pk>', login_required(DeleteGrupoView.as_view()), name = 'delete_grupo'),
     path('grupos/comment/<int:pk>', login_required(AgregarGrupoComentario.as_view()), name = 'add_g_comment'),
+    path('grupos/comment/edit/<int:pk>', EditarGrupoComentario.as_view(), name = 'edit_g_comment'),
     ]

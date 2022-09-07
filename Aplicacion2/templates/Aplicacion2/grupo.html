@@ -65,6 +65,13 @@
                         <div class="card card-body">
                             {{comment.user.username}} <br>
                             {{comment.body}}
+
+                            {% if comment.user.id == user.id %}
+
+                                <a href="{% url 'Aplicacion2:edit_g_comment' comment.id %}">Editar</a>
+
+                            {% endif %}
+
                         </div>
                     </div>
                 {% endfor %}

@@ -31,7 +31,7 @@ class GPost(models.Model):
         return self.user.username +"/" + self.CuerpoPost
 
     def get_absolute_url(self):
-        return reverse('Aplicacion2:grupos')
+        return reverse('Aplicacion2:grupo', kwargs={'grupo': self.grupo})
 
 class GComments(models.Model):
     id = models.AutoField(primary_key=True)
@@ -40,11 +40,13 @@ class GComments(models.Model):
     name = models.CharField(max_length=255)
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    grupoID = models.ForeignKey(Grupo, related_name = "grupo_id" , on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return '%s - %s - %s' % (self.gpost.nombrePost, self.name, self.name) 
     
-
+    def get_absolute_url(self):
+        return reverse('Aplicacion2:grupo', args=[str(self.grupoID.nombre)])
      
 
 

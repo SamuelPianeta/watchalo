@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from Aplicacion2.forms import PostForm, GrupoCreateForm, GrupoCommentForm
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 
@@ -29,7 +30,8 @@ def creacionPost(request, gru):
             post.grupo = gru
             post.user = current_user
             post.save()
-            return redirect('Aplicacion2:grupos')
+            return redirect('Aplicacion2:grupo', gru=gru)
+            
     else:
         form = PostForm()
     return render(request, 'Aplicacion2/post_grupo_form.html', {'form': form,'grupo': gru, 'grupo_posts': grupo_posts })
@@ -91,3 +93,8 @@ class AgregarGrupoComentario(CreateView):
         return super().form_valid(form)
 
     success_url = '/Aplicacion2/grupos/'
+
+class EditarGrupoComentario(UpdateView):
+    model = GComments
+    success_url = '/Aplicacion2/grupos/'
+    fields = ['body']
