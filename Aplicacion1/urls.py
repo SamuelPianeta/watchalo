@@ -1,4 +1,4 @@
-from .views import creacionPost, detallePost, editarPost, eliminarPost, Inicio, login_request, registro, perfil, error404, follow, unfollow, agregarComentario, editarComentario, eliminarComentario
+from .views import creacionPost, detallePost, editarPost, eliminarPost, Inicio, login_request, registro, perfil, error404, follow, unfollow, agregarComentario, editarComentario, eliminarComentario,ActualizarPerfil
 from django.contrib.auth.views import LogoutView
 
 from django.urls import path
@@ -16,6 +16,7 @@ urlpatterns = [
     path('registro/', registro, name='registro'),
     path('logout/', LogoutView.as_view(template_name='Aplicacion1/logout.html'), name='logout'),
     path('perfil/<str:username>/', perfil, name='perfil'),
+    path('perfil/edit/<int:pk>/', ActualizarPerfil.as_view(), name='perfil_edit'),
     path('follow/<str:username>/', follow, name='follow'),
     path('unfollow/<str:username>/', unfollow, name='unfollow'),
     #path('like/<int:pk>',addLike.as_view(), name='like'),

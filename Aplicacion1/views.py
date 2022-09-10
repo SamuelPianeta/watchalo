@@ -3,17 +3,18 @@
 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView, DeleteView, CreateView
-from Aplicacion1.models import Post, Relationship, comments
+from Aplicacion1.models import Post, Relationship, comments, Perfil
 from Aplicacion1.forms import PostForm, UserRegistrationForm,CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
 from django.contrib.auth import login, logout, authenticate
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
 
 # Muro principal / CRUD de posts------------------------------------------------------------------------
 
@@ -147,5 +148,8 @@ def registro(request):
 
     return render(request, 'Aplicacion1/registro.html', {'form': form})
 
-
+class ActualizarPerfil(UpdateView):
+    model = Perfil
+    success_url = '/Aplicacion1/Inicio/'
+    fields = '__all__'
 

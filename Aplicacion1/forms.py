@@ -1,6 +1,7 @@
 
+from turtle import width
 from django import forms
-from .models import Post, Usuario, comments
+from .models import Perfil, Post, Usuario, comments
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -39,3 +40,6 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ['username', 'email','password1', 'password2']
         help_texts={k:"" for k in fields}
+
+
+        
