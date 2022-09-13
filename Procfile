@@ -1,1 +1,1 @@
-web: gunicorn  watchalo.wsgi
+web:gunicorn  watchalo.wsgi
