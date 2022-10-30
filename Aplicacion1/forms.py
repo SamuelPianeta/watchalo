@@ -1,5 +1,4 @@
 
-from turtle import width
 from django import forms
 from .models import Perfil, Post, Usuario, comments
 from django.contrib.auth.forms import UserCreationForm
